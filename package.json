@@ -2,15 +2,24 @@
   "name": "sage-backend",
   "version": "0.0.1",
   "description": "All bronze, no beauty",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "git@github.com:DFG2020/sage-backend.git",
   "author": "shanedharan <shanedharan@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc",
+    "prestart": "npm run build",
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.9",
+    "@types/node": "^14.14.7",
+    "tslint": "^6.1.3",
+    "typescript": "^4.0.5"
   }
 }
