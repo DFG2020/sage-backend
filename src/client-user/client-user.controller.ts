@@ -1,6 +1,8 @@
 import {Body, Controller, Get, Param, Post, Put, Query} from '@nestjs/common';
 import {ClientUserDto} from "./dto/client-user-dto";
+import {ApiTags} from "@nestjs/swagger";
 
+@ApiTags('user')
 @Controller('user')
 export class ClientUserController {
     @Post()
