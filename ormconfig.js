@@ -7,9 +7,9 @@ module.exports = {
     username: process.env.TYPEORM_USERNAME,
     password: process.env.TYPEORM_PASSWORD,
     database: process.env.TYPEORM_DATABASE,
-    migrations: ["dist/migrations/*{.ts,.js}"],
+    migrations: ["dist/migration/*{.ts,.js}"],
     cli: {
-        migrationsDir: "./migrations"
+        migrationsDir: "src/migration"
     },
     migrationsRun: true,
     logging: true,
