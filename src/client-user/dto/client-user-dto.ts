@@ -5,15 +5,13 @@ import {ApiProperty, ApiPropertyOptional} from "@nestjs/swagger";
  * Represents a client user for all request/responses.
  */
 export class ClientUserDto {
-    constructor(userId: string,
-                firstName: string,
+    constructor(firstName: string,
                 lastName: string,
                 middleName: string,
                 forwardAddressLine: string,
                 authorizedPickupFirstName: string,
                 authorizedPickupLastName: string,
                 profile_image_id: string) {
-        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -22,14 +20,6 @@ export class ClientUserDto {
         this.authorizedPickupLastName = authorizedPickupLastName;
         this.profile_image_id = profile_image_id;
     }
-
-    @ApiProperty({
-        description: "The unique identifier for the user.",
-        type: String
-    })
-    @IsNotEmpty()
-    @IsString()
-    readonly userId: string;
 
     @ApiProperty({
         description: "The first name of the user.",
