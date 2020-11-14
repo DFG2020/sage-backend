@@ -1,0 +1,10 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "shane",
+  "password": "mypassword",
+  "database": "kanto",
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "synchronize": true
+}
