@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Put, Query} from '@nestjs/common';
 import {ClientUserDto} from "./dto/client-user-dto";
 
 @Controller('user')
@@ -42,5 +42,30 @@ export class ClientUserController {
             authorizedPickupFirstName,
             authorizedPickupLastName,
             profileImageId);
+    }
+
+    @Get()
+    searchUser(@Query('last_name') last_name: string): Array<ClientUserDto> {
+        const editUser: ClientUserDto = new ClientUserDto("edited_first_name",
+            "edited_first_name",
+            "edited_first_name",
+            "edited_first_name",
+            "edited_first_name",
+            "edited_first_name",
+            "edited_profile_id");
+
+        const newUser: ClientUserDto = new ClientUserDto("new_first_name",
+            "new_first_name",
+            "new_first_name",
+            "new_first_name",
+            "new_first_name",
+            "new_first_name",
+            "new_profile_id");
+
+        const results: Array<ClientUserDto> = [];
+        results.push(editUser);
+        results.push(newUser);
+
+        return results;
     }
 }

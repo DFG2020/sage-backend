@@ -1,4 +1,4 @@
-import {IsEmpty, IsNotEmpty} from "class-validator";
+import {IsNotEmpty, IsOptional, IsString} from "class-validator";
 
 /**
  * Represents a client user for all request/responses.
@@ -21,23 +21,30 @@ export class ClientUserDto {
     }
 
     @IsNotEmpty()
+    @IsString()
     readonly firstName: string;
 
     @IsNotEmpty()
+    @IsString()
     readonly lastName: string;
 
-    @IsEmpty()
+    @IsOptional()
+    @IsString()
     readonly middleName: string;
 
-    @IsEmpty()
+    @IsOptional()
+    @IsString()
     readonly forwardAddressLine: string;
 
-    @IsEmpty()
+    @IsOptional()
+    @IsString()
     readonly authorizedPickupFirstName: string;
 
-    @IsEmpty()
+    @IsOptional()
+    @IsString()
     readonly authorizedPickupLastName: string;
 
-    @IsEmpty()
+    @IsOptional()
+    @IsString()
     readonly profile_image_id: string;
 }
