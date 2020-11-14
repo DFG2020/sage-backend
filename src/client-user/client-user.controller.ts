@@ -8,8 +8,8 @@ import {ClientUserResponseDto} from "./dto/client-user-response-dto";
 export class ClientUserController {
     @Post()
     @ApiResponse({ status: 200, description: 'Create a user', type: ClientUserResponseDto })
-    createUser(@Body() createCatDto: ClientUserDto): ClientUserDto {
-        return createCatDto;
+    createUser(@Body() userDto: ClientUserDto): ClientUserResponseDto {
+        return new ClientUserResponseDto("user_id", userDto);
     }
 
     @Get(':id')
@@ -37,24 +37,7 @@ export class ClientUserController {
 
     @Put(':id')
     @ApiResponse({ status: 200, description: 'Update a specific user', type: ClientUserResponseDto })
-    editUser(@Param('id') id: string): ClientUserResponseDto {
-        const userId: string = "sample_user_id";
-        const firstName: string = "edited_first_name";
-        const lastName: string = "edited_first_name";
-        const middleName: string = "edited_first_name";
-        const forwardAddressLine: string = "edited_first_name";
-        const authorizedPickupFirstName: string = "edited_first_name";
-        const authorizedPickupLastName: string = "edited_first_name";
-        const profileImageId: string = "edited_profile_id";
-
-        const user: ClientUserDto = new ClientUserDto(firstName,
-            lastName,
-            middleName,
-            forwardAddressLine,
-            authorizedPickupFirstName,
-            authorizedPickupLastName,
-            profileImageId);
-
-        return new ClientUserResponseDto(userId, user);
+    editUser(@Param('id') userId: string, @Body() userDto: ClientUserDto): ClientUserResponseDto {
+        return new ClientUserResponseDto(userId, userDto);
     }
 }
