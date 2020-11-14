@@ -1,4 +1,4 @@
-import {IsNotEmpty, IsOptional, IsString} from "class-validator";
+import {IsNotEmpty, IsNumber, IsOptional, IsString} from "class-validator";
 import {ApiProperty, ApiPropertyOptional} from "@nestjs/swagger";
 
 /**
@@ -47,7 +47,7 @@ export class ClientMailDto {
         type: Number
     })
     @IsNotEmpty()
-    @IsString()
+    @IsNumber()
     readonly receivedDateTimeMs: number;
 
     @ApiProperty({
@@ -90,7 +90,7 @@ export class ClientMailDto {
         type: Number
     })
     @IsOptional()
-    @IsString()
+    @IsNumber()
     readonly pickedUpDateTimeMs?: number;
 
     @ApiPropertyOptional({
