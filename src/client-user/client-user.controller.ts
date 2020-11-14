@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post, Put, Query} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
 import {ClientUserDto} from "./dto/client-user-dto";
 import {ApiTags} from "@nestjs/swagger";
 
@@ -12,6 +12,7 @@ export class ClientUserController {
 
     @Get(':id')
     getUser(@Param('id') id: string): ClientUserDto {
+        const userId: string = "sample_user_id";
         const firstName: string = "sample_first_name";
         const lastName: string = "sample_first_name";
         const middleName: string = "sample_first_name";
@@ -19,7 +20,8 @@ export class ClientUserController {
         const authorizedPickupFirstName: string = "sample_first_name";
         const authorizedPickupLastName: string = "sample_first_name";
         const profileImageId: string = "sample_profile_id";
-        return new ClientUserDto(firstName,
+        return new ClientUserDto(userId,
+            firstName,
             lastName,
             middleName,
             forwardAddressLine,
@@ -30,6 +32,7 @@ export class ClientUserController {
 
     @Put(':id')
     editUser(@Param('id') id: string): ClientUserDto {
+        const userId: string = "sample_user_id";
         const firstName: string = "edited_first_name";
         const lastName: string = "edited_first_name";
         const middleName: string = "edited_first_name";
@@ -37,37 +40,13 @@ export class ClientUserController {
         const authorizedPickupFirstName: string = "edited_first_name";
         const authorizedPickupLastName: string = "edited_first_name";
         const profileImageId: string = "edited_profile_id";
-        return new ClientUserDto(firstName,
+        return new ClientUserDto(userId,
+            firstName,
             lastName,
             middleName,
             forwardAddressLine,
             authorizedPickupFirstName,
             authorizedPickupLastName,
             profileImageId);
-    }
-
-    @Get()
-    searchUser(@Query('last_name') last_name: string): Array<ClientUserDto> {
-        const editUser: ClientUserDto = new ClientUserDto("edited_first_name",
-            "edited_first_name",
-            "edited_first_name",
-            "edited_first_name",
-            "edited_first_name",
-            "edited_first_name",
-            "edited_profile_id");
-
-        const newUser: ClientUserDto = new ClientUserDto("new_first_name",
-            "new_first_name",
-            "new_first_name",
-            "new_first_name",
-            "new_first_name",
-            "new_first_name",
-            "new_profile_id");
-
-        const results: Array<ClientUserDto> = [];
-        results.push(editUser);
-        results.push(newUser);
-
-        return results;
     }
 }
