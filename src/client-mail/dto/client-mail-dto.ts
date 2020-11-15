@@ -8,8 +8,19 @@ export enum MailStatus {
     MAIL_FORWARDED = 'MAIL_FORWARDED',
     PENDING_PICKUP = 'PENDING_PICKUP',
     PICKED_UP_CLIENT_USER = 'PICKED_UP_CLIENT_USER',
-    PICKED_UP_FORWARD_USER = 'PICKED_UP_FORWARD_USER',
+    PICKED_UP_AUTH_USER = 'PICKED_UP_AUTH_USER',
     RETURNED_TO_SEND = 'RETURNED_TO_SEND',
+}
+
+/**
+ * All mail types.
+ */
+export enum MailType {
+    PARCEL = 'PARCEL',
+    LARGE_MAIL = 'LARGE_MAIL',
+    OTHER = 'OTHER',
+    REGULAR_SIZED_MAIL = 'REGULAR_SIZED_MAIL',
+    SMALL_BOX = 'SMALL_BOX',
 }
 
 /**
@@ -19,7 +30,8 @@ export class ClientMailDto {
     constructor(userId: string,
                 receivedDateTimeMs: number,
                 staffInitial: string,
-                type: MailStatus,
+                mailStatus: MailStatus,
+                mailType: MailType,
                 fulfillmentProvider?: string,
                 comment?: string,
                 pickedUpDateTimeMs?: number,
@@ -27,7 +39,8 @@ export class ClientMailDto {
         this.userId = userId;
         this.receivedDateTimeMs = receivedDateTimeMs;
         this.staffInitial = staffInitial;
-        this.type = type;
+        this.mailStatus = mailStatus;
+        this.mailType = mailType;
         this.fulfillmentProvider = fulfillmentProvider;
         this.comment = comment;
         this.pickedUpDateTimeMs = pickedUpDateTimeMs;
@@ -64,9 +77,18 @@ export class ClientMailDto {
         enum: MailStatus,
         example: MailStatus.PICKED_UP_CLIENT_USER
     })
-    @IsOptional()
+    @IsNotEmpty()
     @IsString()
-    readonly type: MailStatus;
+    readonly mailStatus: MailStatus;
+
+    @ApiProperty({
+        description: 'A description of the mail.',
+        enum: MailType,
+        example: MailType.PARCEL
+    })
+    @IsNotEmpty()
+    @IsString()
+    readonly mailType: MailType;
 
     @ApiPropertyOptional({
         description: 'The fulfillment provider who brought the mail.',

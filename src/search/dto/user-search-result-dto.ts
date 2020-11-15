@@ -1,7 +1,6 @@
 import {ApiProperty} from "@nestjs/swagger";
 import {IsNotEmpty, ValidateNested} from "class-validator";
 import {ClientUserDto} from "../../client-user/dto/client-user-dto";
-import {ClientMailDto} from "../../client-mail/dto/client-mail-dto";
 
 /**
  * Payload for the search results.
@@ -17,7 +16,7 @@ export class UserSearchResultDto {
 
     @ApiProperty({
         description: "Represents the user's profile",
-        type: ClientMailDto
+        type: ClientUserDto
     })
     @IsNotEmpty()
     @ValidateNested()
