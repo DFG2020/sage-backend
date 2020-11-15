@@ -1,6 +1,6 @@
 import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
 import {ApiResponse, ApiTags} from "@nestjs/swagger";
-import {ClientMailDto, MailStatus} from "./dto/client-mail-dto";
+import {ClientMailDto, MailStatus, MailType} from "./dto/client-mail-dto";
 import {ClientMailResponseDto} from "./dto/client-mail-response-dto";
 
 @ApiTags('mail')
@@ -24,7 +24,7 @@ export class ClientMailController {
         const results: ClientMailResponseDto[] = [];
 
         results.push(new ClientMailResponseDto('mail_id_1',
-            new ClientMailDto(user_id, Date.now(), "SS", MailStatus.PENDING_PICKUP)
+            new ClientMailDto(user_id, Date.now(), "SS", MailStatus.PENDING_PICKUP, MailType.LARGE_MAIL)
         ));
 
         results.push(new ClientMailResponseDto('mail_id_2',
@@ -32,6 +32,7 @@ export class ClientMailController {
                 Date.now(),
                 "SS",
                 MailStatus.PICKED_UP_CLIENT_USER,
+                MailType.PARCEL,
                 "FEDEX",
                 "This is a comment",
                 Date.now(),
