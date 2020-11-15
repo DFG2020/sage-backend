@@ -1,38 +1,39 @@
-import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
+import {Body, Controller, Get, NotFoundException, Param, Post, Put} from '@nestjs/common';
 import {ClientUserDto} from "./dto/client-user-dto";
 import {ApiResponse, ApiTags} from "@nestjs/swagger";
 import {ClientUserResponseDto} from "./dto/client-user-response-dto";
+import {ClientUserService} from "./client-user.service";
+import {ClientUser} from "./entity/client-user.entity";
 
 @ApiTags('user')
 @Controller('user')
 export class ClientUserController {
+    private readonly clientUserService: ClientUserService;
+
+    constructor(clientUserService: ClientUserService) {
+        this.clientUserService = clientUserService;
+    }
+
     @Post()
     @ApiResponse({ status: 200, description: 'Create a user', type: ClientUserResponseDto })
-    createUser(@Body() userDto: ClientUserDto): ClientUserResponseDto {
-        return new ClientUserResponseDto("user_id", userDto);
+    async createUser(@Body() userDto: ClientUserDto): Promise<ClientUserResponseDto> {
+        const clientUser: ClientUser = await this.clientUserService.createUser(userDto.firstName, userDto.lastName);
+
+        const responseUser = new ClientUserDto(clientUser.firstName, clientUser.lastName);
+        return new ClientUserResponseDto(clientUser.userId, responseUser);
     }
 
     @Get(':id')
     @ApiResponse({ status: 200, description: 'Fetch a specific user', type: ClientUserResponseDto })
-    getUser(@Param('id') id: string): ClientUserResponseDto {
-        const userId: string = "sample_user_id";
-        const firstName: string = "sample_first_name";
-        const lastName: string = "sample_first_name";
-        const middleName: string = "sample_first_name";
-        const forwardAddressLine: string = "sample_first_name";
-        const authorizedPickupFirstName: string = "sample_first_name";
-        const authorizedPickupLastName: string = "sample_first_name";
-        const profileImageId: string = "sample_profile_id";
+    @ApiResponse({ status: 404, description: 'If the user does not exist'})
+    async getUser(@Param('id') id: string): Promise<ClientUserResponseDto> {
+        const clientUser: ClientUser | undefined = await this.clientUserService.getUser(id);
+        if (clientUser === undefined) {
+            throw new NotFoundException("User does not exist.")
+        }
 
-        const user: ClientUserDto = new ClientUserDto(firstName,
-            lastName,
-            middleName,
-            forwardAddressLine,
-            authorizedPickupFirstName,
-            authorizedPickupLastName,
-            profileImageId);
-
-        return new ClientUserResponseDto(userId, user);
+        const responseUser = new ClientUserDto(clientUser.firstName, clientUser.lastName);
+        return new ClientUserResponseDto(clientUser.userId, responseUser);
     }
 
     @Put(':id')

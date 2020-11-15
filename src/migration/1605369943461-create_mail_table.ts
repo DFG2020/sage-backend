@@ -4,21 +4,20 @@ export class createMailTable1605369943461 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(
-            'CREATE TABLE IF NOT EXISTS mails ( ' +
-            'mail_id UUID DEFAULT uuid_generate_v4 () NOT NULL, ' +
-            'user_id UUID DEFAULT uuid_generate_v4 (), ' +
+            'CREATE TABLE mails ( ' +
+            'mail_id VARCHAR(32) NOT NULL, ' +
+            'user_id VARCHAR(32) NOT NULL, ' +
             'date_received TIMESTAMP NOT NULL, ' +
             'staff_initial VARCHAR NOT NULL, ' +
             'mail_type INTEGER NOT NULL, ' +
             'sender VARCHAR NOT NULL, ' +
             'remark TEXT, ' +
             'date_pickeup TIMESTAMP NOT NULL, ' +
-            'signature UUID, ' +
+            'signature VARCHAR(32), ' +
             'status VARCHAR, ' +
-            'PRIMARY KEY (mail_id), ' +
-            'CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users (user_id), ' +
-            'CONSTRAINT fk_sign FOREIGN KEY(signature) REFERENCES images (image_id) ' +
-            ');'
+            'PRIMARY KEY (mail_id) ' +
+            ');' +
+            'CREATE INDEX ON mails (user_id); '
         );
     }
 
