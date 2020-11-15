@@ -7,11 +7,11 @@ import {ApiProperty, ApiPropertyOptional} from "@nestjs/swagger";
 export class ClientUserDto {
     constructor(firstName: string,
                 lastName: string,
-                middleName: string,
-                forwardAddressLine: string,
-                authorizedPickupFirstName: string,
-                authorizedPickupLastName: string,
-                profile_image_id: string) {
+                middleName?: string,
+                forwardAddressLine?: string,
+                authorizedPickupFirstName?: string,
+                authorizedPickupLastName?: string,
+                profile_image_id?: string) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;

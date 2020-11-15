@@ -4,9 +4,8 @@ export class createImageTable1605367681348 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(
-            'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"; ' +
-            'CREATE TABLE IF NOT EXISTS images ( ' +
-            'image_id uuid DEFAULT uuid_generate_v4 (), ' +
+            'CREATE TABLE images ( ' +
+            'image_id VARCHAR(32) NOT NULL, ' +
             'image BYTEA, ' +
             'PRIMARY KEY (image_id) ' +
             ');'
