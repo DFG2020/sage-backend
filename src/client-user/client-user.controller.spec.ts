@@ -30,7 +30,7 @@ describe('ClientUserController', () => {
     });
 
     describe('When fetching a user', () => {
-        it('should return a user', async () => {
+        it('should throw exception if user is not found', async () => {
             await expect(subject.getUser('id')).rejects.toThrow(NotFoundException)
         });
     });
