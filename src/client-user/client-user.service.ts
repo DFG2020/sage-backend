@@ -28,4 +28,10 @@ export class ClientUserService {
         const savedUser: ClientUser = await this.usersRepository.save(user);
         return savedUser;
     }
+
+    async updateUser(userId: string, firstName: string, lastName: string): Promise<ClientUser> {
+        await this.usersRepository.update(userId, {firstName: firstName, lastName: lastName});
+        const user: ClientUser | undefined = await this.usersRepository.findOne({userId: userId});
+        return user;
+    }
 }

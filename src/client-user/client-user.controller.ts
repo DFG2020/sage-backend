@@ -38,7 +38,17 @@ export class ClientUserController {
 
     @Put(':id')
     @ApiResponse({ status: 200, description: 'Update a specific user', type: ClientUserResponseDto })
-    editUser(@Param('id') userId: string, @Body() userDto: ClientUserDto): ClientUserResponseDto {
-        return new ClientUserResponseDto(userId, userDto);
+    async editUser(@Param('id') userId: string,
+                   @Body() userDto: ClientUserDto): Promise<ClientUserResponseDto> {
+        const clientUser: ClientUser | undefined = await this.clientUserService.getUser(userId);
+        if (clientUser === undefined) {
+            throw new NotFoundException("User does not exist.")
+        }
+
+        const updatedUser: ClientUser =
+            await this.clientUserService.updateUser(userId, userDto.firstName, userDto.lastName);
+
+        const responseUser = new ClientUserDto(updatedUser.firstName, updatedUser.lastName);
+        return new ClientUserResponseDto(updatedUser.userId, responseUser);
     }
 }
