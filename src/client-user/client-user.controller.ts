@@ -4,7 +4,7 @@ import {ApiResponse, ApiTags} from "@nestjs/swagger";
 import {ClientUserResponseDto} from "./dto/client-user-response-dto";
 import {ClientUserService} from "./client-user.service";
 import {ClientUser} from "./entity/client-user.entity";
-import {ClientUserResponseDtoAdapter} from "./adapter/ClientUserResponseDtoAdapter";
+import {ClientUserResponseDtoAdapter} from "./adapter/client-user-response-dto-adapter";
 
 /**
  * API Controller for the user domain.

@@ -7,7 +7,7 @@ describe('ClientUserDtoAdapter', () => {
 
     beforeEach(() => {
         subject = new ClientUserDtoAdapter();
-    })
+    });
 
     it('should successfully adapt fully defined entity', () => {
         const clientUser: ClientUser = new ClientUser();
@@ -30,7 +30,7 @@ describe('ClientUserDtoAdapter', () => {
         expect(result.authorizedPickupFirstName).toEqual(clientUser.authorizedFirstName);
         expect(result.authorizedPickupLastName).toEqual(clientUser.authorizedLastName);
         expect(result.profile_image_id).toEqual(clientUser.photoId);
-    })
+    });
 
     it('should successfully adapt minimally defined entity', () => {
         const clientUser: ClientUser = new ClientUser();
@@ -47,5 +47,5 @@ describe('ClientUserDtoAdapter', () => {
         expect(result.authorizedPickupFirstName).toBeUndefined();
         expect(result.authorizedPickupLastName).toBeUndefined();
         expect(result.profile_image_id).toBeUndefined();
-    })
+    });
 });
