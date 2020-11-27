@@ -48,4 +48,43 @@ describe('ClientUserDtoAdapter', () => {
         expect(result.authorizedPickupLastName).toBeUndefined();
         expect(result.profileImageId).toBeUndefined();
     });
+
+    it('should successfully adapt fully defined dto into entity', () => {
+        const clientUserDto: ClientUserDto = new ClientUserDto('first_name',
+            'last_name',
+            'middle_name',
+            'forwardAddressLine',
+            'authorizedPickupFirstName,',
+            'authorizedPickupLastName',
+            'profile_image_id');
+
+        const result: ClientUser = subject.toInternal(clientUserDto);
+
+        expect(result.firstName).toEqual(clientUserDto.firstName);
+        expect(result.lastName).toEqual(clientUserDto.lastName);
+        expect(result.middleName).toEqual(clientUserDto.middleName);
+        expect(result.forwardingAddressLine).toEqual(clientUserDto.forwardAddressLine);
+        expect(result.authorizedFirstName).toEqual(clientUserDto.authorizedPickupFirstName);
+        expect(result.authorizedLastName).toEqual(clientUserDto.authorizedPickupLastName);
+        expect(result.photoId).toEqual(clientUserDto.profileImageId);
+        expect(result.userId).toBeUndefined()
+        expect(result.authorizedMiddleName).toBeUndefined()
+    });
+
+    it('should successfully adapt minimally defined dto into entity', () => {
+        const clientUserDto: ClientUserDto = new ClientUserDto('first_name',
+            'last_name');
+
+        const result: ClientUser = subject.toInternal(clientUserDto);
+
+        expect(result.firstName).toEqual(clientUserDto.firstName);
+        expect(result.lastName).toEqual(clientUserDto.lastName);
+        expect(result.middleName).toBeUndefined()
+        expect(result.forwardingAddressLine).toBeUndefined()
+        expect(result.authorizedFirstName).toBeUndefined()
+        expect(result.authorizedLastName).toBeUndefined()
+        expect(result.photoId).toBeUndefined()
+        expect(result.userId).toBeUndefined()
+        expect(result.authorizedMiddleName).toBeUndefined()
+    });
 });

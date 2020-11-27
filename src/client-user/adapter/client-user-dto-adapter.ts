@@ -1,10 +1,11 @@
 import {ClientUser} from "../entity/client-user.entity";
 import {ClientUserDto} from "../dto/client-user-dto";
+import {RequestAdapter} from "../../common/request-adapter";
 
 /**
  * Responsible for adapting a Client User Entity into a Client User DTO.
  */
-export class ClientUserDtoAdapter {
+export class ClientUserDtoAdapter implements RequestAdapter<ClientUser, ClientUserDto> {
     /**
      * Converts the internal representation of users into the external representation.
      *
