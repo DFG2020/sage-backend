@@ -15,14 +15,16 @@ export class ClientUserController {
     private readonly clientUserResponseDtoAdapter: ClientUserResponseDtoAdapter;
     private readonly clientUserService: ClientUserService;
 
-    constructor(clientUserService: ClientUserService) {
+    constructor(clientUserService: ClientUserService, clientUserResponseDtoAdapter: ClientUserResponseDtoAdapter) {
         this.clientUserService = clientUserService;
-        this.clientUserResponseDtoAdapter = new ClientUserResponseDtoAdapter();
+        this.clientUserResponseDtoAdapter = clientUserResponseDtoAdapter;
     }
 
     @Post()
     @ApiResponse({ status: 200, description: 'Create a user', type: ClientUserResponseDto })
     async createUser(@Body() userDto: ClientUserDto): Promise<ClientUserResponseDto> {
+
+
         const clientUser: ClientUser = await this.clientUserService.createUser(userDto.firstName, userDto.lastName);
 
         return this.clientUserResponseDtoAdapter.adapt(clientUser);
