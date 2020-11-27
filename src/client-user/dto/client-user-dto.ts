@@ -2,7 +2,7 @@ import {IsNotEmpty, IsOptional, IsString} from "class-validator";
 import {ApiProperty, ApiPropertyOptional} from "@nestjs/swagger";
 
 /**
- * Represents a client user for all request/responses.
+ * Represents a client user payload that will be used for all request/responses involving a user.
  */
 export class ClientUserDto {
     constructor(firstName: string,

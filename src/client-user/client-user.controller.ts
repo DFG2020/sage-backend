@@ -4,14 +4,20 @@ import {ApiResponse, ApiTags} from "@nestjs/swagger";
 import {ClientUserResponseDto} from "./dto/client-user-response-dto";
 import {ClientUserService} from "./client-user.service";
 import {ClientUser} from "./entity/client-user.entity";
+import {ClientUserResponseDtoAdapter} from "./adapter/ClientUserResponseDtoAdapter";
 
+/**
+ * API Controller for the user domain.
+ */
 @ApiTags('user')
 @Controller('user')
 export class ClientUserController {
+    private readonly clientUserResponseDtoAdapter: ClientUserResponseDtoAdapter;
     private readonly clientUserService: ClientUserService;
 
     constructor(clientUserService: ClientUserService) {
         this.clientUserService = clientUserService;
+        this.clientUserResponseDtoAdapter = new ClientUserResponseDtoAdapter();
     }
 
     @Post()
@@ -19,8 +25,7 @@ export class ClientUserController {
     async createUser(@Body() userDto: ClientUserDto): Promise<ClientUserResponseDto> {
         const clientUser: ClientUser = await this.clientUserService.createUser(userDto.firstName, userDto.lastName);
 
-        const responseUser = new ClientUserDto(clientUser.firstName, clientUser.lastName);
-        return new ClientUserResponseDto(clientUser.userId, responseUser);
+        return this.clientUserResponseDtoAdapter.adapt(clientUser);
     }
 
     @Get(':id')
@@ -32,8 +37,7 @@ export class ClientUserController {
             throw new NotFoundException("User does not exist.")
         }
 
-        const responseUser = new ClientUserDto(clientUser.firstName, clientUser.lastName);
-        return new ClientUserResponseDto(clientUser.userId, responseUser);
+        return this.clientUserResponseDtoAdapter.adapt(clientUser);
     }
 
     @Put(':id')
@@ -48,7 +52,6 @@ export class ClientUserController {
         const updatedUser: ClientUser =
             await this.clientUserService.updateUser(userId, userDto.firstName, userDto.lastName);
 
-        const responseUser = new ClientUserDto(updatedUser.firstName, updatedUser.lastName);
-        return new ClientUserResponseDto(updatedUser.userId, responseUser);
+        return this.clientUserResponseDtoAdapter.adapt(updatedUser);
     }
 }
