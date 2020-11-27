@@ -11,6 +11,6 @@ export class ClientUserDtoAdapter {
             clientUser.middleName, clientUser.forwardingAddressLine,
             clientUser.authorizedFirstName,
             clientUser.authorizedLastName,
-            clientUser.photo_id);
+            clientUser.photoId);
     }
 }

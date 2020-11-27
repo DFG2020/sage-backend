@@ -27,5 +27,5 @@ export class ClientUser {
     authorizedMiddleName?: string;
 
     @Column({name: 'photo_id'})
-    photo_id?: string;
+    photoId?: string;
 }
