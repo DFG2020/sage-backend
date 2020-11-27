@@ -18,7 +18,7 @@ export class ClientUserDto {
         this.forwardAddressLine = forwardAddressLine;
         this.authorizedPickupFirstName = authorizedPickupFirstName;
         this.authorizedPickupLastName = authorizedPickupLastName;
-        this.profile_image_id = profile_image_id;
+        this.profileImageId = profile_image_id;
     }
 
     @ApiProperty({
@@ -78,5 +78,5 @@ export class ClientUserDto {
     })
     @IsOptional()
     @IsString()
-    readonly profile_image_id?: string;
+    readonly profileImageId?: string;
 }

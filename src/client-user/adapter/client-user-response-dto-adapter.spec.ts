@@ -13,7 +13,7 @@ describe('ClientUserResponseDtoAdapter', () => {
     beforeEach(() => {
         clientUserDto = new ClientUserDto('first_name', 'last_name');
         mockClientUserDtoAdapter = new ClientUserDtoAdapter();
-        jest.spyOn(mockClientUserDtoAdapter, 'adapt').mockImplementation(() => clientUserDto);
+        jest.spyOn(mockClientUserDtoAdapter, 'toExternal').mockImplementation(() => clientUserDto);
 
         subject = new ClientUserResponseDtoAdapter(mockClientUserDtoAdapter);
     });

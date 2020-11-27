@@ -21,7 +21,7 @@ describe('ClientUserDtoAdapter', () => {
         clientUser.authorizedMiddleName = 'authorized_middle_name';
         clientUser.photoId = 'photo_id';
 
-        const result: ClientUserDto = subject.adapt(clientUser);
+        const result: ClientUserDto = subject.toExternal(clientUser);
 
         expect(result.firstName).toEqual(clientUser.firstName);
         expect(result.lastName).toEqual(clientUser.lastName);
@@ -29,7 +29,7 @@ describe('ClientUserDtoAdapter', () => {
         expect(result.forwardAddressLine).toEqual(clientUser.forwardingAddressLine);
         expect(result.authorizedPickupFirstName).toEqual(clientUser.authorizedFirstName);
         expect(result.authorizedPickupLastName).toEqual(clientUser.authorizedLastName);
-        expect(result.profile_image_id).toEqual(clientUser.photoId);
+        expect(result.profileImageId).toEqual(clientUser.photoId);
     });
 
     it('should successfully adapt minimally defined entity', () => {
@@ -38,7 +38,7 @@ describe('ClientUserDtoAdapter', () => {
         clientUser.firstName = 'first_name';
         clientUser.lastName = 'last_name';
 
-        const result: ClientUserDto = subject.adapt(clientUser);
+        const result: ClientUserDto = subject.toExternal(clientUser);
 
         expect(result.firstName).toEqual(clientUser.firstName);
         expect(result.lastName).toEqual(clientUser.lastName);
@@ -46,6 +46,6 @@ describe('ClientUserDtoAdapter', () => {
         expect(result.forwardAddressLine).toBeUndefined();
         expect(result.authorizedPickupFirstName).toBeUndefined();
         expect(result.authorizedPickupLastName).toBeUndefined();
-        expect(result.profile_image_id).toBeUndefined();
+        expect(result.profileImageId).toBeUndefined();
     });
 });
