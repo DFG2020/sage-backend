@@ -55,7 +55,7 @@ describe('ClientUserService', () => {
     });
 
     it('should generate user Id when creating a new user', async () => {
-        let userId: String = '';
+        let userId: string = '';
         jest.spyOn(clientUserRepository, 'save')
             .mockImplementation((deepPartial: DeepPartial<ClientUser>) => {
                 userId = deepPartial.userId;

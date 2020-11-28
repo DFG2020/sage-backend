@@ -2,7 +2,7 @@ import {Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {ClientUser} from "./entity/client-user.entity";
 import {Repository} from "typeorm";
-import {v4 as uuidv4} from 'uuid';
+import {UuidGenerator} from "../common/uuid-generator";
 
 /**
  * Service responsible for the business logic around users.
@@ -20,7 +20,7 @@ export class ClientUserService {
     }
 
     async createUser(userToCreate: ClientUser): Promise<ClientUser> {
-        userToCreate.userId = uuidv4().replace(/-/g, "");
+        userToCreate.userId = UuidGenerator.generateUuid();
         return await this.usersRepository.save(userToCreate);
     }
 
