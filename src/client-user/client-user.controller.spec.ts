@@ -2,6 +2,8 @@ import {Test, TestingModule} from '@nestjs/testing';
 import {ClientUserController} from './client-user.controller';
 import {ClientUserService} from "./client-user.service";
 import {NotFoundException} from "@nestjs/common";
+import {ClientUserResponseDtoAdapter} from "./adapter/client-user-response-dto-adapter";
+import {ClientUserDtoAdapter} from "./adapter/client-user-dto-adapter";
 
 describe('ClientUserController', () => {
     let clientUserService: ClientUserService;
@@ -17,6 +19,14 @@ describe('ClientUserController', () => {
                     useValue: {
                         getUser: jest.fn().mockResolvedValue(undefined)
                     }
+                },
+                {
+                    provide: ClientUserResponseDtoAdapter,
+                    useValue: {}
+                },
+                {
+                    provide: ClientUserDtoAdapter,
+                    useValue: {}
                 }
             ]
         }).compile();
