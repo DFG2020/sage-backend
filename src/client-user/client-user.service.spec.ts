@@ -13,7 +13,6 @@ describe('ClientUserService', () => {
 
     beforeEach(async () => {
         clientUser = new ClientUser();
-        clientUser.userId = 'user_id';
         clientUser.firstName = 'first_name';
         clientUser.lastName = 'last_name';
         clientUser.middleName = 'middle_name';
@@ -55,7 +54,7 @@ describe('ClientUserService', () => {
     });
 
     it('should generate user Id when creating a new user', async () => {
-        let userId: string = '';
+        let userId: string = undefined;
         jest.spyOn(clientUserRepository, 'save')
             .mockImplementation((deepPartial: DeepPartial<ClientUser>) => {
                 userId = deepPartial.userId;
@@ -65,7 +64,6 @@ describe('ClientUserService', () => {
         await subject.createUser(clientUser);
 
         expect(userId).toBeDefined()
-        expect(userId.length).toEqual(32)
     });
 
     it('should return undefined if user does not exist on update', async () => {
