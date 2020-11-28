@@ -1,10 +1,12 @@
 import {ClientUser} from "../entity/client-user.entity";
 import {ClientUserDto} from "../dto/client-user-dto";
 import {RequestAdapter} from "../../common/request-adapter";
+import {Injectable} from "@nestjs/common";
 
 /**
  * Responsible for adapting a Client User Entity into a Client User DTO.
  */
+@Injectable()
 export class ClientUserDtoAdapter implements RequestAdapter<ClientUser, ClientUserDto> {
     /**
      * Converts the internal representation of users into the external representation.
