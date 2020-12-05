@@ -2,7 +2,7 @@ import {IsNotEmpty, IsOptional, IsString} from "class-validator";
 import {ApiProperty, ApiPropertyOptional} from "@nestjs/swagger";
 
 /**
- * Represents a client user for all request/responses.
+ * Represents a client user payload that will be used for all request/responses involving a user.
  */
 export class ClientUserDto {
     constructor(firstName: string,
@@ -18,7 +18,7 @@ export class ClientUserDto {
         this.forwardAddressLine = forwardAddressLine;
         this.authorizedPickupFirstName = authorizedPickupFirstName;
         this.authorizedPickupLastName = authorizedPickupLastName;
-        this.profile_image_id = profile_image_id;
+        this.profileImageId = profile_image_id;
     }
 
     @ApiProperty({
@@ -78,5 +78,5 @@ export class ClientUserDto {
     })
     @IsOptional()
     @IsString()
-    readonly profile_image_id?: string;
+    readonly profileImageId?: string;
 }
